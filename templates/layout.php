@@ -1,19 +1,39 @@
+<?php
+session_start();
+
+$templatePath = __DIR__ . "/$template.php";  // Указываем путь к шаблону
+
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Каталог рецептов</title>
+    <title>Блог</title>
 </head>
 <body>
-    <header>
-        <h1><a href="/?page=index">Каталог рецептов</a></h1>
-        <nav>
-            <a href="/?page=create">Добавить рецепт</a>
-        </nav>
-    </header>
+<header>
+    <h1>Добро пожаловать в блог!</h1>
 
-    <main>
-        <?php require $pagePath; ?>
-    </main>
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <p>Вы вошли как: <strong><?= htmlspecialchars($_SESSION['role']) ?></strong></p>
+        <a href="/logout.php">Выйти</a>
+    <?php else: ?>
+        <a href="/login.php">Войти</a> | <a href="/register.php">Регистрация</a>
+    <?php endif; ?>
+    <hr>
+
+    <?php
+    if (file_exists($templatePath)) {
+        include $templatePath;  // Если шаблон существует, подключаем его
+    } else {
+        echo "Шаблон '$template' не найден.";  // Если шаблон не найден, выводим сообщение
+    }
+    ?>
+</header>
+
+<main>
+    
+</main>
+
 </body>
 </html>

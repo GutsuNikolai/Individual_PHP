@@ -3,7 +3,7 @@
 // Подключаем конфигурацию и хелперы
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../src/helpers.php';
-
+require_once __DIR__ . '/../templates/layout.php';
 // Определяем текущую страницу из параметра запроса
 $page = $_GET['page'] ?? 'index';
 
@@ -13,7 +13,6 @@ $page = $_GET['page'] ?? 'index';
  * В случае отсутствия id или рецепта выводится сообщение об ошибке.
  */
 if ($page === 'edit_recipe') {
-    require_once __DIR__ . '/../src/helpers.php';
     $id = $_GET['id'] ?? null;
 
     if ($id) {
@@ -49,4 +48,4 @@ $pagePath = match ($page) {
  * Подключение базового шаблона страницы.
  * Внутри шаблона используется переменная $pagePath для вставки соответствующего контента.
  */
-require_once __DIR__ . '/../templates/layout.php';
+
