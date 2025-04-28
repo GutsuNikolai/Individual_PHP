@@ -15,6 +15,35 @@ function getRecipeById(int $id): ?array
         return null;
     }
 }
+
+function get_posts(): array
+{
+    $pdo = getDbConnection();
+
+    $stmt = $pdo->query('
+        SELECT id, title, description, published_at
+        FROM posts
+        ORDER BY published_at DESC
+        LIMIT 5
+    ');
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // function renderTemplate($template, $data = [])
 // {
 //     // Извлекаем массив данных в отдельные переменные

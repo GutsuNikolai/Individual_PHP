@@ -1,51 +1,11 @@
 <?php
 
-// Подключаем конфигурацию и хелперы
-require_once __DIR__ . '/../config/db.php';
-require_once __DIR__ . '/../src/helpers.php';
-require_once __DIR__ . '/../templates/layout.php';
-// Определяем текущую страницу из параметра запроса
-$page = $_GET['page'] ?? 'index';
+require_once __DIR__ . '/../src/handlers/posts/get_post_handler.php';
 
-/**
- * Обработка запроса страницы редактирования рецепта.
- * Если задан параметр 'id', то производится попытка получить рецепт из базы.
- * В случае отсутствия id или рецепта выводится сообщение об ошибке.
- */
-if ($page === 'edit_recipe') {
-    $id = $_GET['id'] ?? null;
+$category_id = $_GET['category_id'] ?? 'all';  // Получаем категорию (по умолчанию - все)
+$tags_input = $_GET['tags'] ?? '';  // Получаем теги (по умолчанию - пусто)
 
-    if ($id) {
-        $recipe = getRecipeById($id);
+$posts = get_posts($category_id, $tags_input);  // Получаем посты с фильтрацией
 
-        if (!$recipe) {
-            echo "Рецепт не найден.";
-            exit;
-        }
-    } else {
-        echo "ID рецепта не указан.";
-        exit;
-    }
-}
-
-/**
- * Определение пути к файлу шаблона или обработчика в зависимости от значения $page.
- * Используется конструкция match для более чистой и наглядной логики выбора.
- */
-$pagePath = match ($page) {
-    'index' => __DIR__ . '/../templates/index.php',  // Страница главная
-    'create' => __DIR__ . '/../templates/recipe/create.php',  // Страница создания рецепта (форма)
-    'show' => __DIR__ . '/../templates/recipe/show.php',  // Страница просмотра рецепта
-    'test' => __DIR__ . '/../src/test.php',  // Вспомогательная тестовая страница
-    'create_recipe' => __DIR__ . '/../src/handlers/recipe/create.php',  // Обработчик POST-запроса создания рецепта
-    'edit_recipe' => __DIR__ . '/../templates/recipe/edit.php', // Форма редактирования рецепта
-    'edit_recipe_handler' => __DIR__ . '/../src/handlers/recipe/edit.php', // Обработка POST-запроса редактирования
-    'delete_recipe' => __DIR__ . '/../src/handlers/recipe/delete.php', // Обработчик удаления рецепта
-    default => __DIR__ . '/../templates/index.php',  // По умолчанию главная страница
-};
-
-/**
- * Подключение базового шаблона страницы.
- * Внутри шаблона используется переменная $pagePath для вставки соответствующего контента.
- */
-
+$template = 'posts/list';  // Указываем шаблон для отображения отфильтрованных постов
+require_once __DIR__ . '/../templates/layout.php';  // Загружаем основной макет
