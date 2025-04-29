@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 $templatePath = __DIR__ . "/$template.php";  // Указываем путь к шаблону
 ?>

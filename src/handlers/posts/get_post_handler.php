@@ -2,6 +2,9 @@
 
 require_once __DIR__ . '/../../db.php';
 
+session_start();
+
+
 function get_posts($category_id = 'all', $tags = ''): array
 {
     $pdo = getDbConnection();
@@ -63,13 +66,6 @@ function get_posts($category_id = 'all', $tags = ''): array
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
-
-
-
-
-
-
 
 function get_post(int $post_id): array
 {

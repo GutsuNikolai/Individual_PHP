@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    http_response_code(403);
+    exit('Доступ запрещён');
+}
+
 require_once __DIR__ . '/../../db.php';
 
 function handle_edit_post(?string $post_id): array
