@@ -1,4 +1,2 @@
-config/
-vendor/
-composer.lock
-composer.json
+/config/
+/vendor/
