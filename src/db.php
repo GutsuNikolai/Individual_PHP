@@ -3,10 +3,20 @@
 // Подключаем конфигурацию с параметрами подключения
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../vendor/autoload.php';
+
 /**
- * Функция для подключения к базе данных postgreSQL
+ * Создает и возвращает подключение к базе данных PostgreSQL
+ * 
+ * Использует константы для параметров подключения:
+ * - DB_HOST - хост базы данных
+ * - DB_PORT - порт подключения
+ * - DB_NAME - имя базы данных
+ * - DB_USER - имя пользователя
+ * - DB_PASS - пароль
  *
- * @return PDO Экземпляр PDO, настроенный для работы с БД
+ * @return PDO Объект подключения к базе данных
+ * @throws PDOException Если подключение не удалось
+ * @throws RuntimeException Если не определены необходимые константы
  */
 function getDbConnection(): PDO
 {

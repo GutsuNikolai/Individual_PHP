@@ -26,7 +26,7 @@
         <label for="category_id">Категория:</label><br>
         <select id="category_id" name="category_id" required>
             <?php
-                // Получаем все категории из базы данных
+                // Получение всех категорий из бд
                 $pdo = getDbConnection();
                 $stmt = $pdo->query('SELECT id, name FROM categories');
                 while ($category = $stmt->fetch()) {

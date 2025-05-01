@@ -5,19 +5,19 @@ require_once __DIR__ . '/../../db.php';
 
 use MongoDB\Client;
 $pdo = getDbConnection();
+
 // Проверка, авторизован ли пользователь
-//session_start();
 if (!isset($_SESSION['user_id'])) {
     header('Location: /index.php?page=login');
     exit;
 }
 
-// Получение данных из POST
+// Получение данных
 $postId = $_POST['post_id'] ?? null;
 $content = trim($_POST['content'] ?? '');
 $userId = $_SESSION['user_id'] ?? null;
 
-// Проверка
+// Валидация
 if (!$postId || !$content) {
     die('Поля комментария не заполнены.');
 }
@@ -29,11 +29,11 @@ $user = $stmt->fetch();
 $userName = $user ? $user['username'] : 'неизвестный';
 
 // Подключение к MongoDB 
-// TODO
+// TODO - хз, не помню зачем todo.Кажется подключение уже есть, нужно удалить
 $mongo = new Client("mongodb://localhost:27017");
 $collection = $mongo->blog_comments->comments;
 
-// Запись комментария
+// Коммент в mongoDB записываю
 $collection->insertOne([
     'post_id' => (int)$postId,
     'user_id' => (int)$userId,

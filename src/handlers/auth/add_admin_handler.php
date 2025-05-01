@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../db.php';
 /**
- * Обрабатывает регистрацию нового пользователя
+ * Обрабатывает регистрацию нового АДМИНА
  *
  * Принимает POST-данные формы регистрации, валидирует их и создает нового пользователя в БД.
  * В случае ошибки валидации возвращает соответствующее сообщение.
@@ -14,7 +14,7 @@ require_once __DIR__ . '/../../db.php';
  * @throws PDOException Если произошла ошибка при работе с базой данных
  */
 
-function handle_register(): ?string {
+function add_admin(): ?string {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         return null;
     }
@@ -50,8 +50,8 @@ function handle_register(): ?string {
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
     $stmt = $pdo->prepare('INSERT INTO users (username, email, password_hash, role) VALUES (:username, :email, :hash, :role)');
-    $stmt->execute(['username' => $username, 'email' => $email, 'hash' => $hash, 'role' => 'user']);
+    $stmt->execute(['username' => $username, 'email' => $email, 'hash' => $hash, 'role' => 'admin']);
 
-    header('Location: /index.php?page=login');
+    header('Location: /');
     exit;
 }

@@ -2,10 +2,24 @@
 
 require_once __DIR__ . '/../../db.php';
 
-// session_start();
-
-
-function get_posts($category_id = 'all', $tags = ''): array
+/**
+ * Получает список публикаций с возможностью фильтрации по категории и тегам
+ *
+ * Возвращает массив публикаций с агрегированными тегами. Поддерживает фильтрацию:
+ * - По категории (если передано число вместо 'all')
+ * - По тегам (частичное совпадение через LIKE для каждого тега)
+ *
+ * @param string|int $category_id ID категории или 'all' для всех категорий
+ * @param string $tags Строка тегов через запятую для фильтрации
+ * @return array Массив публикаций, каждая с полями:
+ *   - id (int)
+ *   - title (string)
+ *   - description (string)
+ *   - published_at (string)
+ *   - tags (string) - строка тегов через запятую
+ * @throws PDOException Если произошла ошибка при работе с базой данных
+ */
+function get_posts(int|string $category_id = 'all', $tags = ''): array
 {
     $pdo = getDbConnection();
 
@@ -36,7 +50,7 @@ function get_posts($category_id = 'all', $tags = ''): array
         $sql .= ' WHERE p.category_id = :category_id';
     }
 
-    // Добавляем условия для тегов
+    // Добавляю условия для тегов
     if (!empty($tagConditions)) {
         $sql .= $category_id != 'all' ? ' AND ' : ' WHERE ';
         $sql .= implode(' OR ', $tagConditions);
@@ -45,19 +59,14 @@ function get_posts($category_id = 'all', $tags = ''): array
     // Группировка по полям, которые не являются агрегатами
     $sql .= ' GROUP BY p.id, p.title, p.description, p.published_at';
 
-    // Логирование SQL-запроса и параметров
-    //file_put_contents('query_log.txt', "SQL Query: $sql\n", FILE_APPEND);
-    //file_put_contents('query_log.txt', "Params: " . json_encode($tagParams) . "\n", FILE_APPEND);
-
-    // Выполняем запрос
     $stmt = $pdo->prepare($sql);
 
-    // Добавляем параметры для категории
+    // Добавляю параметры для категории
     if ($category_id != 'all') {
         $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
     }
 
-    // Добавляем параметры для тегов
+    // Добавляю параметры для тегов
     foreach ($tagParams as $tagParam => $tagValue) {
         $stmt->bindValue($tagParam, $tagValue, PDO::PARAM_STR);
     }
@@ -67,6 +76,18 @@ function get_posts($category_id = 'all', $tags = ''): array
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * Получает данные конкретной публикации по её ID
+ *
+ * @param int $post_id ID запрашиваемой публикации
+ * @return array|null Ассоциативный массив с данными публикации или null, если не найдена:
+ *   - id (int)
+ *   - title (string)
+ *   - description (string)
+ *   - image_path (string|null)
+ *   - published_at (string)
+ * @throws PDOException Если произошла ошибка при работе с базой данных
+ */
 function get_post(int $post_id): array
 {
     $pdo = getDbConnection();

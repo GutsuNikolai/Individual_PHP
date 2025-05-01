@@ -1,34 +1,29 @@
 <?php
 
-require_once __DIR__ . '/db.php';
+// require_once __DIR__ . '/db.php';
 
-function getRecipeById(int $id): ?array
-{
-    try {
-        $pdo = getDbConnection();
-        $stmt = $pdo->prepare("SELECT * FROM recipes WHERE id = :id");
-        $stmt->execute(['id' => $id]);
-        $recipe = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $recipe ?: null;
-    } catch (PDOException $e) {
-        echo "Ошибка при получении рецепта: " . $e->getMessage();
-        return null;
-    }
-}
+// Кажется нигде не использую. Хз зачем оно тут
 
-function get_posts(): array
-{
-    $pdo = getDbConnection();
+/**
+ * Получает список последних публикаций
+ *
+ * @param int $limit Количество возвращаемых записей (по умолчанию 5)
+ * @return array Массив публикаций, отсортированных по дате публикации (новые сначала)
+ * @throws PDOException Если произошла ошибка при работе с базой данных
+ */
+// function get_posts(): array
+// {
+//     $pdo = getDbConnection();
 
-    $stmt = $pdo->query('
-        SELECT id, title, description, published_at
-        FROM posts
-        ORDER BY published_at DESC
-        LIMIT 5
-    ');
+//     $stmt = $pdo->query('
+//         SELECT id, title, description, published_at
+//         FROM posts
+//         ORDER BY published_at DESC
+//         LIMIT 5
+//     ');
 
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+//     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+// }
 
 
 

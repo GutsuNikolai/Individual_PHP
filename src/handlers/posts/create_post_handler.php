@@ -24,20 +24,21 @@ function handle_create_post(): ?string
         return 'Ошибка: пользователь не авторизован.';
     }
 
-    // 📁 Обработка загрузки картинки
+    //  Обработка загрузки картинки
     $image_path = null;
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $upload_dir = __DIR__ . '/../../../public/uploads/';
+        $upload_dir = __DIR__ . '/../../../public/uploads/'; // Место куда загружается фото при создаии поста
         if (!is_dir($upload_dir)) {
             mkdir($upload_dir, 0755, true);
         }
-
+        
+        // Задаю уникальное имя и получаю путь к этому изображению
         $original_name = basename($_FILES['image']['name']);
         $unique_name = uniqid() . '-' . $original_name;
         $target_path = $upload_dir . $unique_name;
 
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
-            $image_path = '/uploads/' . $unique_name; // Путь для <img src="">
+            $image_path = '/uploads/' . $unique_name; // Путь к изображению при отображении поста
         }
     }
 
@@ -57,16 +58,19 @@ function handle_create_post(): ?string
 
     $post_id = $pdo->lastInsertId();
 
+    // Сохраняю тэги для постов
     if ($tags_input) {
-        $tags = array_map('trim', explode(',', $tags_input));
-        foreach ($tags as $tag) {
+        $tags = array_map('trim', explode(',', $tags_input)); // Получаю тэги
+        foreach ($tags as $tag) { // Погдготавливаю
             $stmt = $pdo->prepare('
                 INSERT INTO tags (name)
                 VALUES (:name)
                 ON CONFLICT (name) DO NOTHING
             ');
-            $stmt->execute(['name' => $tag]);
+            $stmt->execute(['name' => $tag]); // Сохраняю
 
+
+            // Сохраняю в связующую таблицу связи тэгов и постов
             $stmt = $pdo->prepare('
                 INSERT INTO post_tags (post_id, tag_id)
                 SELECT :post_id, id FROM tags WHERE name = :name

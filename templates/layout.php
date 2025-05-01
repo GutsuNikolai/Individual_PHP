@@ -1,6 +1,6 @@
 <?php
-
-$templatePath = __DIR__ . "/$template.php";  // Указываем путь к шаблону
+// Ну що сказать, просто layout с динамичским отображеним шаблонов. Думаю тут все интуитивно понятно
+$templatePath = __DIR__ . "/$template.php";  
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -26,7 +26,7 @@ $templatePath = __DIR__ . "/$template.php";  // Указываем путь к �
                 <select id="category_id" name="category_id">
                     <option value="all">Все</option>
                     <?php
-                        // Получаем категории из базы данных
+                        // Получаю категории из базы данных
                         $pdo = getDbConnection();
                         $stmt = $pdo->query('SELECT id, name FROM categories');
                         while ($category = $stmt->fetch()) {
@@ -51,16 +51,14 @@ $templatePath = __DIR__ . "/$template.php";  // Указываем путь к �
 
     <?php
     if (file_exists($templatePath)) {
-        include $templatePath;  // Если шаблон существует, подключаем его
+        include $templatePath;  // Подключение шаблона, если таков пришел
     } else {
-        echo "Шаблон '$template' не найден.";  // Если шаблон не найден, выводим сообщение
+        echo "Шаблон '$template' не найден."; 
     }
     ?>
-</header>
-
-<main>
     
+</header>
+<main>
 </main>
-
 </body>
 </html>
