@@ -2,9 +2,9 @@
 
 // Подключаем конфигурацию с параметрами подключения
 require_once __DIR__ . '/../config/db.php';
-
+require_once __DIR__ . '/../vendor/autoload.php';
 /**
- * Функция для подключения к базе данных
+ * Функция для подключения к базе данных postgreSQL
  *
  * @return PDO Экземпляр PDO, настроенный для работы с БД
  */
@@ -27,3 +27,7 @@ function getDbConnection(): PDO
         exit;
     }
 }
+
+// Для подключения mongoDB
+$mongoClient = new MongoDB\Client("mongodb://localhost:27017");
+$commentsCollection = $mongoClient->blog_comments->comments;

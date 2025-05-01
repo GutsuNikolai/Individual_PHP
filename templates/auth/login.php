@@ -1,5 +1,5 @@
 <h2>Вход в систему</h2>
-<form method="POST" action="/login.php">
+<form method="POST" action="/index.php?page=login">
     <label for="username">Имя пользователя:</label><br>
     <input type="text" name="username" required><br><br>
 

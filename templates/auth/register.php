@@ -1,5 +1,5 @@
 <h2>Регистрация</h2>
-<form method="POST" action="/register.php">
+<form method="POST" action="/index.php?page=register">
     <label for="username">Имя пользователя:</label><br>
     <input type="text" name="username" required><br><br>
 

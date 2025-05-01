@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+// session_start();
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     http_response_code(403);

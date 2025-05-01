@@ -6,7 +6,7 @@
     </div>
 <?php endif; ?>
 
-<form action="/create_post.php" method="POST">
+<form action="/index.php?page=create_post" method="POST" enctype="multipart/form-data">
     <div>
         <label for="title">Заголовок:</label><br>
         <input type="text" id="title" name="title" required>
@@ -18,8 +18,8 @@
     </div>
 
     <div>
-        <label for="image_path">Ссылка на картинку:</label><br>
-        <input type="text" id="image_path" name="image_path">
+        <label for="image">Загрузить изображение:</label>
+        <input type="file" name="image" id="image">
     </div>
 
     <div>

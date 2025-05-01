@@ -6,7 +6,7 @@
     </div>
 <?php endif; ?>
 
-<form action="/edit_post.php?id=<?= $post['id'] ?>" method="POST">
+<form action="/index.php?page=edit_post&id=<?= $post['id'] ?>" method="POST">
     <input type="hidden" name="post_id" value="<?= htmlspecialchars($post['id']) ?>">   
     <div>
         <label for="title">Заголовок:</label><br>

@@ -8,7 +8,7 @@
 
 <p><strong>Название поста:</strong> <?= htmlspecialchars($post['title']) ?></p>
 
-<form action="/delete_post.php?id=<?= htmlspecialchars($post['id']) ?>" method="POST">
+<form action="/index.php?page=delete_post&id=<?= htmlspecialchars($post['id']) ?>" method="POST">
     <button type="submit" name="confirm_delete" value="yes">Да, удалить</button>
     <button type="submit" name="confirm_delete" value="no">Отмена</button>
 </form>

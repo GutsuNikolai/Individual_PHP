@@ -11,7 +11,10 @@ $routes = [
     'logout'      => __DIR__ . '/../actions/logout.php',
     'register'    => __DIR__ . '/../actions/register.php',
     'post'        => __DIR__ . '/../actions/post.php',
-    'home'      => __DIR__ . '/../actions/home.php'
+    'home'      => __DIR__ . '/../actions/home.php',
+    'submit_comment'        => __DIR__ . '/../src/handlers/posts/submit_comment_handler.php',
+    'edit_comment'        => __DIR__ . '/../actions/edit_comment.php',
+    'delete_comment'        => __DIR__ . '/../src/handlers/posts/delete_comment_handler.php',
 ];
 
 if (isset($routes[$page])) {

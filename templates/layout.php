@@ -1,5 +1,4 @@
 <?php
-// session_start();
 
 $templatePath = __DIR__ . "/$template.php";  // Указываем путь к шаблону
 ?>
@@ -11,16 +10,19 @@ $templatePath = __DIR__ . "/$template.php";  // Указываем путь к �
 </head>
 <body>
 <header>
-    <h1>Добро пожаловать в блог!</h1>
+    <h1><a href="/?page=home">Добро пожаловать в блог!</a></h1>
 
     <?php if (isset($_SESSION['user_id'])): ?>
         <p>Вы вошли как: <strong><?= htmlspecialchars($_SESSION['role']) ?></strong></p>
-        <a href="/logout.php">Выйти</a>
+        <a href="/index.php?page=logout">Выйти</a>
+        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+            <a href="/index.php?page=create_post"></br>Создать пост</a>
+        <?php endif; ?>
         
         <!-- Форма поиска по постам -->
-        <form action="/index.php" method="GET">
+        <form action="/index.php?page=search" method="GET">
             <div>
-                <label for="category_id">Категория:</label>
+                <label for="category_id">Поиск по:</br>Категория:</label>
                 <select id="category_id" name="category_id">
                     <option value="all">Все</option>
                     <?php
@@ -41,8 +43,9 @@ $templatePath = __DIR__ . "/$template.php";  // Указываем путь к �
 
             <button type="submit">Поиск</button>
         </form>
+    
     <?php else: ?>
-        <a href="/login.php">Войти</a> | <a href="/register.php">Регистрация</a>
+        <a href="/index.php?page=login">Войти</a> | <a href="/index.php?page=register">Регистрация</a>
     <?php endif; ?>
     <hr>
 
