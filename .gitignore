@@ -1,2 +1,4 @@
 config/
-src/handler
+vendor/
+composer.lock
+composer.json
