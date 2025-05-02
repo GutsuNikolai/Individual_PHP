@@ -78,30 +78,30 @@
 ## Примеры интерфейса
 
 1. Главная страница  
-   ![Main page](images/main_page)
+   ![Main page](images/main_page.png)
 
 2. Регистрация  
-   ![Registration page](images/registration_page)
+   ![Registration page](images/registration_page.png)
 
 3. Просмотр статьи  
-   ![Post details](images/post_details)
+   ![Post details](images/post_details.png)
 
 4. Редактирование поста  
-   ![Edit post page](images/edit_post_page)
+   ![Edit post page](images/edit_post_page.png)
 
 5. Редактирование комментария  
-   ![Edit comment page](images/edit_comment_page)
+   ![Edit comment page](images/edit_comment_page.png)
 
 6. Удаление комментария  
-   ![Delete comment _before](images/delete_comment_before)  
-   ![Delete comment _after](images/delete_comment_after)
+   ![Delete comment _before](images/delete_comment_before.png)  
+   ![Delete comment _after](images/delete_comment_after.png)
 
 7. Создание поста  
-   ![Create post page](images/create_post_page)
+   ![Create post page](images/create_post_page.png)
 
 8. Работа формы поиска  
-   ![Search form _before](images/search_form_before)  
-   ![Search form _after](images/search_form_after)
+   ![Search form _before](images/search_form_before.png)  
+   ![Search form _after](images/search_form_after.png)
 
 ## Безопасность
 
