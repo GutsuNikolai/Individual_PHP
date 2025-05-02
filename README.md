@@ -119,7 +119,7 @@
    git clone https://github.com/yourusername/blog-project.git
     ```
 
-2. Создайте структуру базы данных PostgreSQL с помощью скрипта `create_db_script.php`.
+2. Создайте структуру базы данных PostgreSQL с помощью скрипта `create_db_script.php` либо создайте пустую базу данных и  выполните файл `blog.sql`.
 3. Установите MongoDB: `https://www.mongodb.com/try/download/community`.
 4. Проверьте, что в `php.ini` включены расширения:
     - pdo_pgsql
