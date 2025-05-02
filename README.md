@@ -8,8 +8,6 @@
 
 В ходе проекта были закреплены навыки разработки REST API, взаимодействия с реляционными и документно-ориентированными базами данных, а также применены знания, полученные в течение учебного семестра.
 
----
-
 ## Документация проекта
 
 Приложение реализовано на PHP с использованием PostgreSQL и MongoDB.
@@ -54,8 +52,6 @@
 - Создание, редактирование, удаление постов
 - Редактирование, удаление комментариев
 - Добавление новых администраторов
-
----
 
 ## Структура базы данных
 
@@ -107,8 +103,6 @@
    ![Search form _before](images/search_form_before)  
    ![Search form _after](images/search_form_after)
 
----
-
 ## Безопасность
 
 - Использование `PDO` и подготовленных выражений
@@ -116,8 +110,6 @@
 - Контроль доступа по ролям
 - Хэширование паролей
 - Работа через сессии
-
----
 
 ## Инструкция по запуску проекта
 
@@ -133,17 +125,18 @@
     - pdo_pgsql
     - pgsql
     - mongodb
-5. Если MongoDB-расширение не установлено:
+  
+   Если MongoDB-расширение не установлено:
     - `pecl install mongodb`
     - Или загрузите [`php_mongodb.dll`](https://windows.php.net/downloads/pecl/releases/mongodb/1.13.0/) поместите `php_mongodb.dll` в `php/ext` и подключите в `php.ini`. Убедитесь, что PHP версии ≤ 8.1
-6. Установите зависимости через Composer командами `composer install` & `composer require mongodb/mongodb`
-7. Создайте файл `config/db.php` со следующими параметрами:
+5. Установите зависимости через Composer командами `composer install` & `composer require mongodb/mongodb`
+6. Создайте файл `config/db.php` со следующими параметрами:
     - `define('DB_HOST', 'localhost');`
     - `define('DB_NAME', 'blog');`
     - `define('DB_USER', 'YOUR_USERNAME');`
     - `define('DB_PASS', 'YOUR_PASSWORD');`
     - `define('DB_PORT', '5432');`
-8. Запустите сервер командой `php -S localhost:8000 -t public`.
+7. Запустите сервер командой `php -S localhost:8000 -t public`.
 
 ## Выводы
 

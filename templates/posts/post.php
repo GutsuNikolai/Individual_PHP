@@ -13,7 +13,12 @@ $commentsArray = iterator_to_array($comments);
 <p><strong>Опубликовано:</strong> <?= htmlspecialchars($post['published_at']) ?></p>
 
 <?php if ($post['image_path']): ?>
-    <img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Изображение поста">
+    <div style="display: flex; justify-content: center;">
+        <img src="<?= htmlspecialchars($post['image_path']) ?>" 
+             alt="Изображение поста" 
+             style="max-width: 70%; 
+             height: auto;">
+    </div>
 <?php endif; ?>
 
 <p><strong>Содержание:</strong> <?= nl2br(htmlspecialchars($post['description'])) ?></p>

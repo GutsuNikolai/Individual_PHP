@@ -18,7 +18,7 @@
     </div>
 
     <div>
-        <label for="image">Загрузить изображение:</label>
+        <label for="image">Загрузить изображение:</label></br>
         <input type="file" name="image" id="image">
     </div>
 
